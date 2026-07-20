@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Style Edit · The Art of Layering</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fcf9f7;
+            color: #1a1a2e;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            background: #1a1a2e;
+            color: #e8e3d9;
+            padding: 0.5rem 0;
+            font-size: 0.8rem;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .top-bar .social-links a {
+            color: #e8e3d9;
+            margin-left: 1rem;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .top-bar .social-links a:hover {
+            color: #c9a07a;
+        }
+
+        .top-bar .auth-links a {
+            color: #e8e3d9;
+            margin-left: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .top-bar .auth-links a:hover {
+            color: #c9a07a;
+        }
+
+        /* ===== HEADER / NAVIGATION ===== */
+        header {
+            background: #ffffff;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid #eeeae5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .logo span {
+            color: #c9a07a;
+        }
+
+        .logo i {
+            color: #c9a07a;
+            margin-right: 0.3rem;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: #2d2d44;
+            transition: 0.3s;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #c9a07a;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #c9a07a;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a.active {
+            color: #c9a07a;
+        }
+
+        nav a.active::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: #c9a07a;
+            color: #ffffff !important;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600 !important;
+            transition: 0.3s;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: #b88e68;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 160, 122, 0.3);
+            color: #ffffff !important;
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #1a1a2e;
+        }
+
+        /* ===== BREADCRUMB ===== */
+        .breadcrumb {
+            padding: 1.5rem 0 0 0;
+            font-size: 0.85rem;
+            color: #8a8a9e;
+        }
+
+        .breadcrumb a {
+            color: #c9a07a;
+            transition: 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: #b88e68;
+        }
+
+        .breadcrumb span {
+            margin: 0 0.5rem;
+        }
+
+        /* ===== POST SECTION ===== */
+        .post-section {
+            padding: 2rem 0 4rem 0;
+        }
+
+        .post-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 3rem;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .post-main .post-header {
+            margin-bottom: 2rem;
+        }
+
+        .post-main .post-header .post-category {
+            display: inline-block;
+            background: #f0ebe5;
+            color: #5a5a72;
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.8rem;
+        }
+
+        .post-main .post-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+        }
+
+        .post-main .post-header .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            font-size: 0.9rem;
+            color: #8a8a9e;
+            flex-wrap: wrap;
+        }
+
+        .post-main .post-header .post-meta .author {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .post-main .post-header .post-meta .author .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #c9a07a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .post-main .post-header .post-meta .author .name {
+            font-weight: 500;
+            color: #1a1a2e;
+        }
+
+        .post-main .featured-image {
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            background: #e8e3d9;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .post-main .featured-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .post-main .post-content {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #2d2d44;
+        }
+
+        .post-main .post-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .post-main .post-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            color: #1a1a2e;
+        }
+
+        .post-main .post-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 0.8rem 0;
+            color: #1a1a2e;
+        }
+
+        .post-main .post-content ul {
+            margin: 1rem 0 1.5rem 2rem;
+        }
+
+        .post-main .post-content ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .post-main .post-content .pull-quote {
+            background: #f0ebe5;
+            padding: 2rem 2.5rem;
+            border-radius: 1rem;
+            margin: 2rem 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: #1a1a2e;
+            border-left: 4px solid #c9a07a;
+        }
+
+        .post-main .post-content .pull-quote cite {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            font-style: normal;
+            color: #8a8a9e;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* ===== SHARE BUTTONS ===== */
+        .share-section {
+            margin: 3rem 0 2rem 0;
+            padding: 2rem 0;
+            border-top: 1px solid #f0ebe5;
+            border-bottom: 1px solid #f0ebe5;
+        }
+
+        .share-section h4 {
+            font-size: 0.9rem;
+            color: #5a5a72;
+            margin-bottom: 1rem;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .share-buttons a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            color: #ffffff;
+        }
+
+        .share-buttons a:hover {
+            transform: translateY(-3px);
+        }
+
+        .share-buttons .facebook {
+            background: #1877f2;
+        }
+        .share-buttons .twitter {
+            background: #000000;
+        }
+        .share-buttons .pinterest {
+            background: #e60023;
+        }
+        .share-buttons .whatsapp {
+            background: #25d366;
+        }
+        .share-buttons .email {
+            background: #5a5a72;
+        }
+
+        /* ===== AUTHOR BIO ===== */
+        .author-bio {
+            display: flex;
+            gap: 1.5rem;
+            background: #fcf9f7;
+            border: 1px solid #f0ebe5;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            align-items: flex-start;
+        }
+
+        .author-bio .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #c9a07a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 2rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .author-bio .info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .author-bio .info p {
+            color: #5a5a72;
+            font-size: 0.95rem;
+        }
+
+        .author-bio .info .social {
+            margin-top: 0.5rem;
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .author-bio .info .social a {
+            color: #8a8a9e;
+            transition: 0.3s;
+        }
+
+        .author-bio .info .social a:hover {
+            color: #c9a07a;
+        }
+
+        /* ===== COMMENTS ===== */
+        .comments-section {
+            margin-top: 3rem;
+        }
+
+        .comments-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .comment {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #f0ebe5;
+        }
+
+        .comment .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #e8e3d9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #5a5a72;
+            flex-shrink: 0;
+        }
+
+        .comment .content .name {
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .comment .content .date {
+            font-size: 0.8rem;
+            color: #8a8a9e;
+            margin-left: 0.8rem;
+        }
+
+        .comment .content p {
+            margin-top: 0.3rem;
+            color: #2d2d44;
+        }
+
+        .comment .content .reply {
+            display: inline-block;
+            margin-top: 0.5rem;
+            color: #c9a07a;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        .comment .content .reply:hover {
+            color: #b88e68;
+        }
+
+        .comment-form {
+            margin-top: 2rem;
+        }
+
+        .comment-form h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .comment-form input,
+        .comment-form textarea {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            border: 1px solid #f0ebe5;
+            border-radius: 0.8rem;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            color: #1a1a2e;
+            transition: 0.3s;
+            margin-bottom: 1rem;
+            outline: none;
+        }
+
+        .comment-form input:focus,
+        .comment-form textarea:focus {
+            border-color: #c9a07a;
+            box-shadow: 0 0 0 3px rgba(201, 160, 122, 0.1);
+        }
+
+        .comment-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .comment-form button {
+            padding: 0.8rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            background: #c9a07a;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .comment-form button:hover {
+            background: #b88e68;
+            transform: translateY(-2px);
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar-widget {
+            background: #ffffff;
+            border: 1px solid #f0ebe5;
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .sidebar-widget h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0ebe5;
+        }
+
+        .sidebar-widget .category-list {
+            list-style: none;
+        }
+
+        .sidebar-widget .category-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0ebe5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-widget .category-list li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-widget .category-list a {
+            color: #2d2d44;
+            transition: 0.3s;
+        }
+
+        .sidebar-widget .category-list a:hover {
+            color: #c9a07a;
+        }
+
+        .sidebar-widget .category-list .count {
+            background: #f0ebe5;
+            padding: 0.1rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: #5a5a72;
+        }
+
+        .sidebar-widget .recent-posts {
+            list-style: none;
+        }
+
+        .sidebar-widget .recent-posts li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f0ebe5;
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .sidebar-widget .recent-posts li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-widget .recent-posts .thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background: #e8e3d9;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .sidebar-widget .recent-posts .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .sidebar-widget .recent-posts .info a {
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .sidebar-widget .recent-posts .info a:hover {
+            color: #c9a07a;
+        }
+
+        .sidebar-widget .recent-posts .info .date {
+            font-size: 0.75rem;
+            color: #8a8a9e;
+        }
+
+        /* ===== RELATED POSTS ===== */
+        .related-posts {
+            padding: 3rem 0;
+            border-top: 1px solid #f0ebe5;
+            margin-top: 2rem;
+        }
+
+        .related-posts h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .related-card {
+            background: #ffffff;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid #f0ebe5;
+            transition: 0.3s;
+        }
+
+        .related-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .related-card .thumb {
+            aspect-ratio: 16/10;
+            background: #e8e3d9;
+            overflow: hidden;
+        }
+
+        .related-card .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.3s;
+        }
+
+        .related-card:hover .thumb img {
+            transform: scale(1.03);
+        }
+
+        .related-card .info {
+            padding: 1rem;
+        }
+
+        .related-card .info .category {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #8a8a9e;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .related-card .info h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            margin-top: 0.3rem;
+            transition: 0.3s;
+        }
+
+        .related-card .info h4 a:hover {
+            color: #c9a07a;
+        }
+
+        .related-card .info .date {
+            font-size: 0.8rem;
+            color: #8a8a9e;
+            margin-top: 0.3rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #0f0f1a;
+            color: #8a8a9e;
+            padding: 3rem 0 2rem 0;
+            text-align: center;
+        }
+
+        .footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer .footer-links a {
+            color: #e8e3d9;
+            transition: 0.3s;
+        }
+
+        .footer .footer-links a:hover {
+            color: #c9a07a;
+        }
+
+        .footer .social-links a {
+            color: #8a8a9e;
+            margin: 0 0.6rem;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .footer .social-links a:hover {
+            color: #c9a07a;
+            transform: translateY(-3px);
+        }
+
+        .footer p {
+            font-size: 0.85rem;
+            margin-top: 1.5rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .post-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+            }
+            .related-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .top-bar .social-links {
+                margin-top: 0.3rem;
+            }
+            nav {
+                display: none;
+            }
+            nav.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #ffffff;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                border-bottom: 1px solid #f0ebe5;
+            }
+            .mobile-toggle {
+                display: block;
+            }
+            .post-main .post-header h1 {
+                font-size: 2rem;
+            }
+            .post-main .post-content {
+                font-size: 0.95rem;
+            }
+            .author-bio {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .sidebar {
+                grid-template-columns: 1fr;
+            }
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 0 1.2rem;
+            }
+            .post-main .post-header .post-meta {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .post-main .post-header h1 {
+                font-size: 1.6rem;
+            }
+            .post-main .post-content .pull-quote {
+                padding: 1.5rem;
+                font-size: 1.1rem;
+            }
+            .share-buttons a {
+                padding: 0.4rem 1rem;
+                font-size: 0.8rem;
+            }
+            .comment-form input,
+            .comment-form textarea {
+                padding: 0.6rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <div class="auth-links">
+                <a href="admin/login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <a href="admin/signup.html"><i class="fas fa-user-plus"></i> Sign Up</a>
+                <a href="#"><i class="fas fa-search"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-scroll"></i> The <span>Style</span> Edit
+            </div>
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="blog.html" class="active">Blog</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="admin/login.html" class="nav-cta">Write for us</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <section class="breadcrumb">
+        <div class="container">
+            <a href="index.html">Home</a> <span>/</span>
+            <a href="blog.html">Blog</a> <span>/</span>
+            <span style="color: #5a5a72;">The Art of Layering</span>
+        </div>
+    </section>
+
+    <!-- ===== POST SECTION ===== -->
+    <section class="post-section">
+        <div class="container">
+            <div class="post-layout">
+
+                <!-- ===== MAIN CONTENT ===== -->
+                <div class="post-main">
+
+                    <!-- Post Header -->
+                    <div class="post-header">
+                        <span class="post-category">Street Style</span>
+                        <h1>The Art of Layering: Winter Street Style Guide</h1>
+                        <div class="post-meta">
+                            <span class="author">
+                                <span class="avatar">S</span>
+                                <span><span class="name">Sarah Mitchell</span> · Fashion Editor</span>
+                            </span>
+                            <span><i class="far fa-calendar-alt"></i> June 15, 2026</span>
+                            <span><i class="far fa-clock"></i> 8 min read</span>
+                        </div>
+                    </div>
+
+                    <!-- Featured Image -->
+                    <div class="featured-image">
+                        <img src="assets/p2.png" alt="The Art of Layering" onerror="this.parentElement.style.background='#e8ddd0'; this.style.display='none';" />
+                    </div>
+
+                    <!-- Post Content -->
+                    <div class="post-content">
+
+                        <p>Layering is more than just a practical response to cold weather—it's an art form that allows you to express your personal style while staying comfortable and chic. Whether you're navigating the streets of New York or braving the chill of London, mastering the art of layering is essential for any fashion-forward individual.</p>
+
+                        <p>In this guide, we'll explore the essential pieces you need, how to combine them, and tips for creating looks that are both stylish and functional.</p>
+
+                        <h2>The 5 Essential Layering Pieces</h2>
+
+                        <p>Every great layered look starts with the right foundation. Here are the five pieces you need in your wardrobe:</p>
+
+                        <ul>
+                            <li><strong>The Base Layer:</strong> A lightweight turtleneck or fitted long-sleeve top in a neutral color like black, white, or beige.</li>
+                            <li><strong>The Mid Layer:</strong> A cozy sweater, cardigan, or denim jacket that adds texture and warmth.</li>
+                            <li><strong>The Outer Layer:</strong> A structured coat, trench, or puffer jacket that makes a statement.</li>
+                            <li><strong>The Accessory Layer:</strong> Scarves, hats, and gloves that add personality and color.</li>
+                            <li><strong>The Final Touch:</strong> Footwear that anchors the look—boots are always a great choice.</li>
+                        </ul>
+
+                        <div class="pull-quote">
+                            "Layering is the ultimate form of self-expression in fashion. It's about creating depth, texture, and dimension—telling a story with every piece you wear."
+                            <cite>— Sarah Mitchell, Fashion Editor</cite>
+                        </div>
+
+                        <h2>How to Layer Like a Pro</h2>
+
+                        <p>Now that you have the essential pieces, here are some tips for putting them together:</p>
+
+                        <h3>1. Start with a Solid Foundation</h3>
+                        <p>Your base layer should be comfortable and breathable. Opt for materials like cotton, merino wool, or silk that will keep you warm without adding bulk.</p>
+
+                        <h3>2. Play with Proportions</h3>
+                        <p>Mix oversized and fitted pieces to create visual interest. For example, pair an oversized coat with a fitted turtleneck and wide-leg trousers.</p>
+
+                        <h3>3. Experiment with Textures</h3>
+                        <p>Combine different fabrics like wool, leather, silk, and cotton to add depth to your outfit. A chunky knit sweater paired with a silky skirt creates a beautiful contrast.</p>
+
+                        <h3>4. Use Accessories Wisely</h3>
+                        <p>Accessories are the finishing touch to any layered look. A statement scarf, a bold hat, or layered necklaces can elevate your outfit instantly.</p>
+
+                        <h3>5. Don't Forget the Footwear</h3>
+                        <p>Your shoes should complement your outfit and be practical for the weather. Chunky boots, sleek ankle boots, or stylish sneakers are all great options.</p>
+
+                        <h2>Seasonal Layering Tips</h2>
+
+                        <p>Layering isn't just for winter—it's a year-round styling technique. Here are some seasonal tips:</p>
+
+                        <ul>
+                            <li><strong>Spring:</strong> Light layers like a trench coat over a floral dress.</li>
+                            <li><strong>Summer:</strong> Thin layers like a kimono over a tank top and shorts.</li>
+                            <li><strong>Fall:</strong> Cozy layers like a cardigan over a turtleneck with jeans.</li>
+                            <li><strong>Winter:</strong> Heavy layers like a puffer coat over a sweater and scarf.</li>
+                        </ul>
+
+                        <p>Mastering the art of layering takes practice, but once you get the hang of it, you'll be able to create looks that are both stylish and practical. So go ahead, experiment with different combinations, and make layering your signature style.</p>
+
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <h4>Share This Article</h4>
+                        <div class="share-buttons">
+                            <a href="#" class="facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
+                            <a href="#" class="twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                            <a href="#" class="pinterest"><i class="fab fa-pinterest"></i> Pinterest</a>
+                            <a href="#" class="whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                            <a href="#" class="email"><i class="fas fa-envelope"></i> Email</a>
+                        </div>
+                    </div>
+
+                    <!-- Author Bio -->
+                    <div class="author-bio">
+                        <div class="avatar">S</div>
+                        <div class="info">
+                            <h4>Sarah Mitchell</h4>
+                            <p>Sarah is a fashion editor with over a decade of experience in the industry. She has worked with some of the world's leading fashion houses and is passionate about sustainable fashion and street style.</p>
+                            <div class="social">
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comments Section -->
+                    <div class="comments-section">
+                        <h3>Comments (3)</h3>
+
+                        <div class="comment">
+                            <div class="avatar">A</div>
+                            <div class="content">
+                                <span class="name">Amara Okafor</span>
+                                <span class="date">June 16, 2026</span>
+                                <p>This is such a helpful guide! I've always struggled with layering, but these tips make it seem so easy. Can't wait to try them out.</p>
+                                <a href="#" class="reply">Reply</a>
+                            </div>
+                        </div>
+
+                        <div class="comment">
+                            <div class="avatar">T</div>
+                            <div class="content">
+                                <span class="name">Tunde Balogun</span>
+                                <span class="date">June 16, 2026</span>
+                                <p>Love the seasonal tips! As someone who travels a lot, it's great to have a guide that works for different climates.</p>
+                                <a href="#" class="reply">Reply</a>
+                            </div>
+                        </div>
+
+                        <div class="comment">
+                            <div class="avatar">L</div>
+                            <div class="content">
+                                <span class="name">Lola Adeyemi</span>
+                                <span class="date">June 15, 2026</span>
+                                <p>This is exactly what I needed. The pull quote about layering being self-expression really resonated with me. 💛</p>
+                                <a href="#" class="reply">Reply</a>
+                            </div>
+                        </div>
+
+                        <!-- Comment Form -->
+                        <div class="comment-form">
+                            <h4>Leave a Comment</h4>
+                            <form onsubmit="event.preventDefault(); alert('Thank you for your comment!');">
+                                <input type="text" placeholder="Your Name" required />
+                                <input type="email" placeholder="Your Email" required />
+                                <textarea placeholder="Your Comment..." required></textarea>
+                                <button type="submit">Post Comment</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ===== SIDEBAR ===== -->
+                <aside class="sidebar">
+
+                    <!-- Categories Widget -->
+                    <div class="sidebar-widget">
+                        <h3>Categories</h3>
+                        <ul class="category-list">
+                            <li><a href="category.html?cat=street-style">Street Style</a> <span class="count">12</span></li>
+                            <li><a href="category.html?cat=runway">Runway</a> <span class="count">8</span></li>
+                            <li><a href="category.html?cat=sustainable">Sustainable Fashion</a> <span class="count">6</span></li>
+                            <li><a href="category.html?cat=accessories">Accessories</a> <span class="count">10</span></li>
+                            <li><a href="category.html?cat=beauty">Beauty</a> <span class="count">9</span></li>
+                            <li><a href="category.html?cat=lifestyle">Lifestyle</a> <span class="count">7</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Recent Posts Widget -->
+                    <div class="sidebar-widget">
+                        <h3>Recent Posts</h3>
+                        <ul class="recent-posts">
+                            <li>
+                                <div class="thumb">
+                                    <img src="assets/p3.png" alt="Paris Fashion Week" onerror="this.parentElement.style.background='#d4c9bc'; this.style.display='none';" />
+                                </div>
+                                <div class="info">
+                                    <a href="post.html?id=2">Paris Fashion Week: The Trends You Need to Know</a>
+                                    <div class="date">June 12, 2026</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="thumb">
+                                    <img src="assets/p4.png" alt="Sustainable Brands" onerror="this.parentElement.style.background='#d6c9b8'; this.style.display='none';" />
+                                </div>
+                                <div class="info">
+                                    <a href="post.html?id=3">5 Sustainable Brands Changing the Fashion Industry</a>
+                                    <div class="date">June 10, 2026</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="thumb">
+                                    <img src="assets/p5.png" alt="Accessories Guide" onerror="this.parentElement.style.background='#ddd0c4'; this.style.display='none';" />
+                                </div>
+                                <div class="info">
+                                    <a href="post.html?id=4">The Ultimate Accessories Guide for Every Occasion</a>
+                                    <div class="date">June 8, 2026</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- About Widget -->
+                    <div class="sidebar-widget">
+                        <h3>About The Style Edit</h3>
+                        <p style="color: #5a5a72; font-size: 0.95rem; line-height: 1.7;">
+                            The Style Edit is your go-to destination for fashion inspiration, style guides, and the latest trends from the world's most iconic runways and street style.
+                        </p>
+                        <a href="about.html" style="display: inline-block; margin-top: 1rem; color: #c9a07a; font-weight: 500;">Read More →</a>
+                    </div>
+
+                </aside>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RELATED POSTS ===== -->
+    <section class="related-posts">
+        <div class="container">
+            <h3>You Might Also Like</h3>
+            <div class="related-grid">
+
+                <div class="related-card">
+                    <div class="thumb">
+                        <img src="assets/p3.png" alt="Paris Fashion Week" onerror="this.parentElement.style.background='#d4c9bc'; this.style.display='none';" />
+                    </div>
+                    <div class="info">
+                        <div class="category">Runway</div>
+                        <h4><a href="post.html?id=2">Paris Fashion Week: The Trends You Need to Know</a></h4>
+                        <div class="date">June 12, 2026</div>
+                    </div>
+                </div>
+
+                <div class="related-card">
+                    <div class="thumb">
+                        <img src="assets/p4.png" alt="Sustainable Brands" onerror="this.parentElement.style.background='#d6c9b8'; this.style.display='none';" />
+                    </div>
+                    <div class="info">
+                        <div class="category">Sustainable Fashion</div>
+                        <h4><a href="post.html?id=3">5 Sustainable Brands Changing the Fashion Industry</a></h4>
+                        <div class="date">June 10, 2026</div>
+                    </div>
+                </div>
+
+                <div class="related-card">
+                    <div class="thumb">
+                        <img src="assets/p5.png" alt="Accessories Guide" onerror="this.parentElement.style.background='#ddd0c4'; this.style.display='none';" />
+                    </div>
+                    <div class="info">
+                        <div class="category">Accessories</div>
+                        <h4><a href="post.html?id=4">The Ultimate Accessories Guide for Every Occasion</a></h4>
+                        <div class="date">June 8, 2026</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="blog.html">Blog</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="admin/login.html">Admin</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>&copy; 2026 The Style Edit. All rights reserved. Made with <i class="fas fa-heart" style="color: #c9a07a;"></i></p>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // Mobile toggle
+        const toggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        toggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // Close on link click (mobile)
+        document.querySelectorAll('#navLinks a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // Sticky header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.04)';
+            }
+        });
+    </script>
+
+</body>
+</html>

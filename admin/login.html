@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Style Edit · Admin Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fcf9f7;
+            color: #1a1a2e;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ===== LOGIN CONTAINER ===== */
+        .login-container {
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.08);
+            padding: 3rem 3.5rem;
+            max-width: 440px;
+            width: 100%;
+            border: 1px solid #f0ebe5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #c9a07a, #b88e68);
+        }
+
+        /* ===== LOGO ===== */
+        .login-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-logo .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .login-logo .logo span {
+            color: #c9a07a;
+        }
+
+        .login-logo .logo i {
+            color: #c9a07a;
+            margin-right: 0.3rem;
+        }
+
+        .login-logo p {
+            color: #8a8a9e;
+            font-size: 0.95rem;
+            margin-top: 0.3rem;
+        }
+
+        /* ===== FORM ===== */
+        .login-form h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 0.3rem;
+            text-align: center;
+        }
+
+        .login-form h2 span {
+            color: #c9a07a;
+        }
+
+        .login-form .subtitle {
+            text-align: center;
+            color: #8a8a9e;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            font-size: 0.85rem;
+            color: #2d2d44;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            border: 1px solid #f0ebe5;
+            border-radius: 0.8rem;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            background: #fcf9f7;
+            color: #1a1a2e;
+            transition: 0.3s;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #c9a07a;
+            box-shadow: 0 0 0 3px rgba(201, 160, 122, 0.1);
+            background: #ffffff;
+        }
+
+        .form-group .input-with-icon {
+            position: relative;
+        }
+
+        .form-group .input-with-icon i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8a8a9e;
+            font-size: 1rem;
+        }
+
+        .form-group .input-with-icon input {
+            padding-left: 2.8rem;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .form-options label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #5a5a72;
+            cursor: pointer;
+        }
+
+        .form-options label input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #c9a07a;
+            cursor: pointer;
+        }
+
+        .form-options a {
+            color: #c9a07a;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .form-options a:hover {
+            color: #b88e68;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 50px;
+            background: #c9a07a;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-login:hover {
+            background: #b88e68;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 160, 122, 0.3);
+        }
+
+        /* ===== BACK LINK ===== */
+        .back-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .back-link a {
+            color: #8a8a9e;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        .back-link a:hover {
+            color: #c9a07a;
+        }
+
+        .back-link a i {
+            margin-right: 0.3rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 2rem 1.5rem;
+            }
+            .form-options {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: flex-start;
+            }
+            .login-logo .logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+
+        <!-- ===== LOGO ===== -->
+        <div class="login-logo">
+            <div class="logo">
+                <i class="fas fa-scroll"></i> The <span>Style</span> Edit
+            </div>
+            <p>Fashion & Lifestyle Blog</p>
+        </div>
+
+        <!-- ===== LOGIN FORM ===== -->
+        <div class="login-form">
+            <h2>Welcome <span>Back</span></h2>
+            <p class="subtitle">Log in to your admin dashboard</p>
+
+            <form onsubmit="event.preventDefault(); alert('Login successful! Redirecting to dashboard...'); window.location.href='dashboard.html';">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" placeholder="Enter your email" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Enter your password" required />
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label>
+                        <input type="checkbox" checked /> Remember me
+                    </label>
+                    <a href="#">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-sign-in-alt"></i> Log In
+                </button>
+            </form>
+
+            <!-- ===== BACK LINK ===== -->
+            <div class="back-link">
+                <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

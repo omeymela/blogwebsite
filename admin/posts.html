@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Style Edit · Manage Posts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0ebe5;
+            color: #1a1a2e;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            background: #1a1a2e;
+            color: #e8e3d9;
+            padding: 0.5rem 0;
+            font-size: 0.8rem;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .top-bar .auth-links a {
+            color: #e8e3d9;
+            margin-left: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .top-bar .auth-links a:hover {
+            color: #c9a07a;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: #ffffff;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eeeae5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .logo span {
+            color: #c9a07a;
+        }
+
+        .logo i {
+            color: #c9a07a;
+            margin-right: 0.3rem;
+        }
+
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .admin-user .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #c9a07a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .admin-user .name {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .admin-user .role {
+            font-size: 0.75rem;
+            color: #8a8a9e;
+        }
+
+        .admin-user .logout {
+            color: #8a8a9e;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .admin-user .logout:hover {
+            color: #e74c3c;
+        }
+
+        /* ===== DASHBOARD LAYOUT ===== */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #f0ebe5;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .sidebar .menu-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8a8a9e;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .sidebar .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.7rem 1rem;
+            border-radius: 0.8rem;
+            transition: 0.3s;
+            color: #5a5a72;
+            margin-bottom: 0.2rem;
+            cursor: pointer;
+        }
+
+        .sidebar .menu-item:hover {
+            background: #fcf9f7;
+            color: #1a1a2e;
+        }
+
+        .sidebar .menu-item.active {
+            background: #fcf9f7;
+            color: #c9a07a;
+            font-weight: 600;
+        }
+
+        .sidebar .menu-item i {
+            width: 20px;
+            font-size: 1rem;
+        }
+
+        .sidebar .menu-item .badge {
+            margin-left: auto;
+            background: #f0ebe5;
+            padding: 0.1rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #5a5a72;
+        }
+
+        .sidebar .menu-item.active .badge {
+            background: #c9a07a;
+            color: #ffffff;
+        }
+
+        .sidebar .divider {
+            height: 1px;
+            background: #f0ebe5;
+            margin: 0.8rem 0;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+        }
+
+        .page-header h1 span {
+            color: #c9a07a;
+        }
+
+        .page-header p {
+            color: #8a8a9e;
+        }
+
+        .page-header .actions {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #c9a07a;
+            color: #ffffff;
+            padding: 0.7rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary:hover {
+            background: #b88e68;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 160, 122, 0.3);
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #2d2d44;
+            padding: 0.7rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: 0.3s;
+            border: 1px solid #f0ebe5;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .btn-secondary:hover {
+            background: #fcf9f7;
+            border-color: #c9a07a;
+        }
+
+        /* ===== POSTS TABLE ===== */
+        .posts-section {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #f0ebe5;
+        }
+
+        /* ===== FILTERS ===== */
+        .filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .filters .left {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filters .left input,
+        .filters .left select {
+            padding: 0.6rem 1rem;
+            border: 1px solid #f0ebe5;
+            border-radius: 0.8rem;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            background: #fcf9f7;
+            color: #1a1a2e;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .filters .left input:focus,
+        .filters .left select:focus {
+            border-color: #c9a07a;
+            box-shadow: 0 0 0 3px rgba(201, 160, 122, 0.1);
+        }
+
+        .filters .left input {
+            min-width: 200px;
+        }
+
+        .filters .right {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .filters .right .view-btn {
+            padding: 0.5rem 0.8rem;
+            border: 1px solid #f0ebe5;
+            border-radius: 0.5rem;
+            background: #ffffff;
+            color: #8a8a9e;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .filters .right .view-btn.active {
+            background: #c9a07a;
+            color: #ffffff;
+            border-color: #c9a07a;
+        }
+
+        .filters .right .view-btn:hover {
+            border-color: #c9a07a;
+        }
+
+        /* ===== TABLE ===== */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        thead {
+            background: #fcf9f7;
+            border-radius: 0.8rem;
+        }
+
+        thead th {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #5a5a72;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #f0ebe5;
+        }
+
+        thead th:first-child {
+            border-radius: 0.8rem 0 0 0.8rem;
+        }
+
+        thead th:last-child {
+            border-radius: 0 0.8rem 0.8rem 0;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #f0ebe5;
+            transition: 0.3s;
+        }
+
+        tbody tr:hover {
+            background: #fcf9f7;
+        }
+
+        tbody td {
+            padding: 0.8rem 1rem;
+            vertical-align: middle;
+        }
+
+        tbody td .post-title {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        tbody td .post-title .thumb {
+            width: 40px;
+            height: 40px;
+            border-radius: 0.5rem;
+            background: #e8e3d9;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        tbody td .post-title .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        tbody td .post-title .title {
+            font-weight: 500;
+        }
+
+        tbody td .post-title .title a:hover {
+            color: #c9a07a;
+        }
+
+        .status {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            display: inline-block;
+        }
+
+        .status.published {
+            background: #e8f5e9;
+            color: #27ae60;
+        }
+
+        .status.draft {
+            background: #fff3e0;
+            color: #f39c12;
+        }
+
+        .status.pending {
+            background: #e3f2fd;
+            color: #2196f3;
+        }
+
+        .status.trashed {
+            background: #fce4ec;
+            color: #e74c3c;
+        }
+
+        .actions-cell {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .actions-cell a {
+            color: #8a8a9e;
+            transition: 0.3s;
+            font-size: 0.9rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.3rem;
+        }
+
+        .actions-cell a:hover {
+            color: #c9a07a;
+            background: #fcf9f7;
+        }
+
+        .actions-cell a.delete:hover {
+            color: #e74c3c;
+        }
+
+        /* ===== CHECKBOX ===== */
+        .checkbox {
+            width: 16px;
+            height: 16px;
+            accent-color: #c9a07a;
+            cursor: pointer;
+        }
+
+        /* ===== BULK ACTIONS ===== */
+        .bulk-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #f0ebe5;
+        }
+
+        .bulk-actions .left {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .bulk-actions .left select {
+            padding: 0.5rem 1rem;
+            border: 1px solid #f0ebe5;
+            border-radius: 0.8rem;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            background: #fcf9f7;
+            color: #1a1a2e;
+            outline: none;
+        }
+
+        .bulk-actions .left select:focus {
+            border-color: #c9a07a;
+        }
+
+        .bulk-actions .left .apply-btn {
+            padding: 0.5rem 1.2rem;
+            border: none;
+            border-radius: 0.8rem;
+            background: #c9a07a;
+            color: #ffffff;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+        }
+
+        .bulk-actions .left .apply-btn:hover {
+            background: #b88e68;
+        }
+
+        .bulk-actions .right {
+            color: #8a8a9e;
+            font-size: 0.85rem;
+        }
+
+        /* ===== PAGINATION ===== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .pagination a {
+            padding: 0.4rem 0.8rem;
+            border: 1px solid #f0ebe5;
+            border-radius: 0.5rem;
+            color: #2d2d44;
+            transition: 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .pagination a:hover {
+            background: #c9a07a;
+            color: #ffffff;
+            border-color: #c9a07a;
+        }
+
+        .pagination a.active {
+            background: #c9a07a;
+            color: #ffffff;
+            border-color: #c9a07a;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 0.5rem;
+                padding: 1.2rem;
+            }
+            .sidebar .menu-label {
+                grid-column: 1 / -1;
+            }
+            .sidebar .divider {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.2rem;
+            }
+            .admin-user .name,
+            .admin-user .role {
+                display: none;
+            }
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .filters .left {
+                flex-direction: column;
+            }
+            .filters .left input {
+                min-width: auto;
+                width: 100%;
+            }
+            .filters .left select {
+                width: 100%;
+            }
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .page-header .actions {
+                width: 100%;
+            }
+            .page-header .actions .btn-primary,
+            .page-header .actions .btn-secondary {
+                flex: 1;
+                justify-content: center;
+            }
+            .table-wrapper {
+                overflow-x: auto;
+            }
+            table {
+                min-width: 700px;
+            }
+            .bulk-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .bulk-actions .left {
+                flex-direction: column;
+            }
+            .bulk-actions .left select {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+            .sidebar {
+                grid-template-columns: 1fr 1fr;
+            }
+            .filters .right .view-btn {
+                padding: 0.4rem 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+        <div class="container">
+            <span><i class="fas fa-shield-alt"></i> Admin Panel</span>
+            <div class="auth-links">
+                <a href="../index.html"><i class="fas fa-home"></i> View Site</a>
+                <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-scroll"></i> The <span>Style</span> Edit
+            </div>
+            <div class="admin-user">
+                <div class="avatar">S</div>
+                <div>
+                    <div class="name">Sarah Mitchell</div>
+                    <div class="role">Editor-in-Chief</div>
+                </div>
+                <a href="login.html" class="logout" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== DASHBOARD ===== -->
+    <div class="container">
+        <div class="dashboard">
+
+            <!-- ===== SIDEBAR ===== -->
+            <aside class="sidebar">
+                <div class="menu-label">Main Menu</div>
+                <a href="dashboard.html" class="menu-item">
+                    <i class="fas fa-th-large"></i> Dashboard
+                </a>
+                <a href="posts.html" class="menu-item active">
+                    <i class="fas fa-file-alt"></i> All Posts
+                    <span class="badge">12</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-plus-circle"></i> Add New
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-tags"></i> Categories
+                    <span class="badge">6</span>
+                </a>
+                <div class="divider"></div>
+                <div class="menu-label">Engagement</div>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-comments"></i> Comments
+                    <span class="badge">24</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-users"></i> Users
+                    <span class="badge">8</span>
+                </a>
+                <div class="divider"></div>
+                <div class="menu-label">Settings</div>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-palette"></i> Theme
+                </a>
+            </aside>
+
+            <!-- ===== MAIN CONTENT ===== -->
+            <main class="main-content">
+
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div>
+                        <h1>Manage <span>Posts</span></h1>
+                        <p>Create, edit, and manage all your blog content</p>
+                    </div>
+                    <div class="actions">
+                        <a href="#" class="btn-primary"><i class="fas fa-plus"></i> Add New</a>
+                        <a href="#" class="btn-secondary"><i class="fas fa-file-export"></i> Export</a>
+                    </div>
+                </div>
+
+                <!-- Posts Table -->
+                <div class="posts-section">
+                    <!-- Filters -->
+                    <div class="filters">
+                        <div class="left">
+                            <input type="text" placeholder="Search posts..." />
+                            <select>
+                                <option value="">All Categories</option>
+                                <option value="street-style">Street Style</option>
+                                <option value="runway">Runway</option>
+                                <option value="sustainable">Sustainable Fashion</option>
+                                <option value="accessories">Accessories</option>
+                                <option value="beauty">Beauty</option>
+                                <option value="lifestyle">Lifestyle</option>
+                            </select>
+                            <select>
+                                <option value="">All Status</option>
+                                <option value="published">Published</option>
+                                <option value="draft">Draft</option>
+                                <option value="pending">Pending Review</option>
+                                <option value="trashed">Trashed</option>
+                            </select>
+                        </div>
+                        <div class="right">
+                            <button class="view-btn active" title="List View"><i class="fas fa-list"></i></button>
+                            <button class="view-btn" title="Grid View"><i class="fas fa-th-large"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Table -->
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" class="checkbox" id="selectAll" /></th>
+                                    <th>Post</th>
+                                    <th>Category</th>
+                                    <th>Author</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox" class="checkbox" /></td>
+                                    <td>
+                                        <div class="post-title">
+                                            <div class="thumb">
+                                                <img src="../assets/p2.png" alt="Layering" onerror="this.parentElement.style.background='#e8ddd0'; this.style.display='none';" />
+                                            </div>
+                                            <div class="title">
+                                                <a href="../post.html?id=1">The Art of Layering: Winter Street Style Guide</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Street Style</td>
+                                    <td>Sarah Mitchell</td>
+                                    <td>Jun 15, 2026</td>
+                                    <td><span class="status published">Published</span></td>
+                                    <td>
+                                        <div class="actions-cell">
+                                            <a href="#" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <a href="../post.html?id=1" title="View" target="_blank"><i class="fas fa-eye"></i></a>
+                                            <a href="#" class="delete" title="Delete"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" class="checkbox" /></td>
+                                    <td>
+                                        <div class="post-title">
+                                            <div class="thumb">
+                                                <img src="../assets/p3.png" alt="Paris Fashion Week" onerror="this.parentElement.style.background='#d4c9bc'; this.style.display='none';" />
+                                            </div>
+                                            <div class="title">
+                                                <a href="../post.html?id=2">Paris Fashion Week: The Trends You Need to Know</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Runway</td>
+                                    <td>Marcus Cole</td>
+                                    <td>Jun 12, 2026</td>
+                                    <td><span class="status published">Published</span></td>
+                                    <td>
+                                        <div class="actions-cell">
+                                            <a href="#" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <a href="../post.html?id=2" title="View" target="_blank"><i class="fas fa-eye"></i></a>
+                                            <a href="#" class="delete" title="Delete"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" class="checkbox" /></td>
+                                    <td>
+                                        <div class="post-title">
+                                            <div class="thumb">
+                                                <img src="../assets/p4.png" alt="Sustainable Brands" onerror="this.parentElement.style.background='#d6c9b8'; this.style.display='none';" />
+                                            </div>
+                                            <div class="title">
+                                                <a href="../post.html?id=3">5 Sustainable Brands Changing the Fashion Industry</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Sustainable</td>
+                                    <td>Jessica Wu</td>
+                                    <td>Jun 10, 2026</td>
+                                    <td><span class="status draft">Draft</span></td>
+                                    <td>
+                                        <div class="actions-cell">
+                                            <a href="#" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <a href="../post.html?id=3" title="View" target="_blank"><i class="fas fa-eye"></i></a>
+                                            <a href="#" class="delete" title="Delete"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" class="checkbox" /></td>
+                                    <td>
+                                        <div class="post-title">
+                                            <div class="thumb">
+                                                <img src="../assets/p5.png" alt="Accessories Guide" onerror="this.parentElement.style.background='#ddd0c4'; this.style.display='none';" />
+                                            </div>
+                                            <div class="title">
+                                                <a href="../post.html?id=4">The Ultimate Accessories Guide for Every Occasion</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Accessories</td>
+                                    <td>Amara Okafor</td>
+                                    <td>Jun 8, 2026</td>
+                                    <td><span class="status pending">Pending</span></td>
+                                    <td>
+                                        <div class="actions-cell">
+                                            <a href="#" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <a href="../post.html?id=4" title="View" target="_blank"><i class="fas fa-eye"></i></a>
+                                            <a href="#" class="delete" title="Delete"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" class="checkbox" /></td>
+                                    <td>
+                                        <div class="post-title">
+                                            <div class="thumb">
+                                                <img src="../assets/p6.png" alt="Beauty Trends" onerror="this.parentElement.style.background='#d4c4b8'; this.style.display='none';" />
+                                            </div>
+                                            <div class="title">
+                                                <a href="../post.html?id=5">Summer Beauty Trends: Fresh Looks for the Season</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Beauty</td>
+                                    <td>Lola Adeyemi</td>
+                                    <td>Jun 5, 2026</td>
+                                    <td><span class="status published">Published</span></td>
+                                    <td>
+                                        <div class="actions-cell">
+                                            <a href="#" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <a href="../post.html?id=5" title="View" target="_blank"><i class="fas fa-eye"></i></a>
+                                            <a href="#" class="delete" title="Delete"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" class="checkbox" /></td>
+                                    <td>
+                                        <div class="post-title">
+                                            <div class="thumb">
+                                                <img src="../assets/p7.png" alt="Capsule Wardrobe" onerror="this.parentElement.style.background='#dccfc3'; this.style.display='none';" />
+                                            </div>
+                                            <div class="title">
+                                                <a href="../post.html?id=6">How to Build a Capsule Wardrobe That Works</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Lifestyle</td>
+                                    <td>Tunde Balogun</td>
+                                    <td>Jun 2, 2026</td>
+                                    <td><span class="status trashed">Trashed</span></td>
+                                    <td>
+                                        <div class="actions-cell">
+                                            <a href="#" title="Restore"><i class="fas fa-undo"></i></a>
+                                            <a href="#" class="delete" title="Delete Permanently"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" class="checkbox" /></td>
+                                    <td>
+                                        <div class="post-title">
+                                            <div class="thumb">
+                                                <img src="../assets/p8.png" alt="Street Style Photography" onerror="this.parentElement.style.background='#e0d5c8'; this.style.display='none';" />
+                                            </div>
+                                            <div class="title">
+                                                <a href="../post.html?id=8">Street Style Photography: Capturing Fashion in Motion</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Street Style</td>
+                                    <td>Amara Okafor</td>
+                                    <td>May 28, 2026</td>
+                                    <td><span class="status draft">Draft</span></td>
+                                    <td>
+                                        <div class="actions-cell">
+                                            <a href="#" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <a href="../post.html?id=8" title="View" target="_blank"><i class="fas fa-eye"></i></a>
+                                            <a href="#" class="delete" title="Delete"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Bulk Actions -->
+                    <div class="bulk-actions">
+                        <div class="left">
+                            <select>
+                                <option value="">Bulk Actions</option>
+                                <option value="publish">Publish</option>
+                                <option value="draft">Move to Draft</option>
+                                <option value="pending">Mark Pending</option>
+                                <option value="trash">Move to Trash</option>
+                                <option value="delete">Delete Permanently</option>
+                            </select>
+                            <button class="apply-btn">Apply</button>
+                            <span style="color: #8a8a9e; font-size: 0.85rem;">|</span>
+                            <span style="color: #8a8a9e; font-size: 0.85rem;">0 items selected</span>
+                        </div>
+                        <div class="right">
+                            Showing 1–7 of 12 posts
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <a href="#">&laquo;</a>
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">&raquo;</a>
+                    </div>
+
+                </div>
+
+            </main>
+
+        </div>
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // Select All checkbox
+        document.getElementById('selectAll').addEventListener('change', function(e) {
+            const checkboxes = document.querySelectorAll('.checkbox');
+            checkboxes.forEach(cb => {
+                cb.checked = e.target.checked;
+            });
+            updateSelectedCount();
+        });
+
+        // Individual checkboxes
+        document.querySelectorAll('.checkbox:not(#selectAll)').forEach(cb => {
+            cb.addEventListener('change', updateSelectedCount);
+        });
+
+        function updateSelectedCount() {
+            const checked = document.querySelectorAll('.checkbox:checked:not(#selectAll)').length;
+            const text = document.querySelector('.bulk-actions .left span:last-child');
+            if (text) {
+                text.textContent = checked + ' items selected';
+            }
+        }
+
+        // View buttons toggle
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Apply button alert
+        document.querySelector('.apply-btn').addEventListener('click', function() {
+            const select = document.querySelector('.bulk-actions .left select');
+            const action = select.options[select.selectedIndex]?.text || 'No action';
+            if (select.value) {
+                alert('Bulk action "' + action + '" applied to selected posts.');
+            } else {
+                alert('Please select a bulk action.');
+            }
+        });
+    </script>
+
+</body>
+</html>

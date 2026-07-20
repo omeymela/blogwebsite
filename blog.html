@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Style Edit · Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fcf9f7;
+            color: #1a1a2e;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            background: #1a1a2e;
+            color: #e8e3d9;
+            padding: 0.5rem 0;
+            font-size: 0.8rem;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .top-bar .social-links a {
+            color: #e8e3d9;
+            margin-left: 1rem;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .top-bar .social-links a:hover {
+            color: #c9a07a;
+        }
+
+        .top-bar .auth-links a {
+            color: #e8e3d9;
+            margin-left: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .top-bar .auth-links a:hover {
+            color: #c9a07a;
+        }
+
+        /* ===== HEADER / NAVIGATION ===== */
+        header {
+            background: #ffffff;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid #eeeae5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .logo span {
+            color: #c9a07a;
+        }
+
+        .logo i {
+            color: #c9a07a;
+            margin-right: 0.3rem;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: #2d2d44;
+            transition: 0.3s;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #c9a07a;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #c9a07a;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a.active {
+            color: #c9a07a;
+        }
+
+        nav a.active::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: #c9a07a;
+            color: #ffffff !important;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600 !important;
+            transition: 0.3s;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: #b88e68;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 160, 122, 0.3);
+            color: #ffffff !important;
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #1a1a2e;
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            background: linear-gradient(135deg, #fcf9f7 0%, #f0ebe5 100%);
+            padding: 4rem 0 3rem 0;
+            border-bottom: 1px solid #eeeae5;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #1a1a2e;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header h1 span {
+            color: #c9a07a;
+        }
+
+        .page-header p {
+            color: #5a5a72;
+            font-size: 1.1rem;
+        }
+
+        /* ===== BLOG SECTION ===== */
+        .blog-section {
+            padding: 4rem 0;
+        }
+
+        .blog-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 3rem;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .blog-main .search-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .blog-main .search-bar input {
+            flex: 1;
+            padding: 0.8rem 1.2rem;
+            border: 1px solid #f0ebe5;
+            border-radius: 50px;
+            font-size: 1rem;
+            background: #ffffff;
+            color: #1a1a2e;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .blog-main .search-bar input:focus {
+            border-color: #c9a07a;
+            box-shadow: 0 0 0 3px rgba(201, 160, 122, 0.1);
+        }
+
+        .blog-main .search-bar button {
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 50px;
+            background: #c9a07a;
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .blog-main .search-bar button:hover {
+            background: #b88e68;
+        }
+
+        /* ===== POSTS GRID ===== */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .post-card {
+            background: #ffffff;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            transition: 0.3s;
+            border: 1px solid #f0ebe5;
+        }
+
+        .post-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .post-card .post-image {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: #e8e3d9;
+            overflow: hidden;
+        }
+
+        .post-card .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.3s;
+        }
+
+        .post-card:hover .post-image img {
+            transform: scale(1.03);
+        }
+
+        .post-card .post-content {
+            padding: 1.5rem;
+        }
+
+        .post-card .post-category {
+            display: inline-block;
+            background: #f0ebe5;
+            color: #5a5a72;
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            transition: 0.3s;
+        }
+
+        .post-card h3 a:hover {
+            color: #c9a07a;
+        }
+
+        .post-card .post-excerpt {
+            color: #5a5a72;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .post-card .post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #8a8a9e;
+            border-top: 1px solid #f0ebe5;
+            padding-top: 1rem;
+        }
+
+        .post-card .post-meta .author {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .post-card .post-meta .author .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #c9a07a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* ===== PAGINATION ===== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+        }
+
+        .pagination a {
+            padding: 0.5rem 1rem;
+            border: 1px solid #f0ebe5;
+            border-radius: 8px;
+            color: #2d2d44;
+            transition: 0.3s;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .pagination a:hover {
+            background: #c9a07a;
+            color: #ffffff;
+            border-color: #c9a07a;
+        }
+
+        .pagination a.active {
+            background: #c9a07a;
+            color: #ffffff;
+            border-color: #c9a07a;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar-widget {
+            background: #ffffff;
+            border: 1px solid #f0ebe5;
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .sidebar-widget h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0ebe5;
+        }
+
+        .sidebar-widget .category-list {
+            list-style: none;
+        }
+
+        .sidebar-widget .category-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0ebe5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-widget .category-list li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-widget .category-list a {
+            color: #2d2d44;
+            transition: 0.3s;
+        }
+
+        .sidebar-widget .category-list a:hover {
+            color: #c9a07a;
+        }
+
+        .sidebar-widget .category-list .count {
+            background: #f0ebe5;
+            padding: 0.1rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: #5a5a72;
+        }
+
+        .sidebar-widget .recent-posts {
+            list-style: none;
+        }
+
+        .sidebar-widget .recent-posts li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f0ebe5;
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .sidebar-widget .recent-posts li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-widget .recent-posts .thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background: #e8e3d9;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .sidebar-widget .recent-posts .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .sidebar-widget .recent-posts .info a {
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .sidebar-widget .recent-posts .info a:hover {
+            color: #c9a07a;
+        }
+
+        .sidebar-widget .recent-posts .info .date {
+            font-size: 0.75rem;
+            color: #8a8a9e;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #0f0f1a;
+            color: #8a8a9e;
+            padding: 3rem 0 2rem 0;
+            text-align: center;
+        }
+
+        .footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer .footer-links a {
+            color: #e8e3d9;
+            transition: 0.3s;
+        }
+
+        .footer .footer-links a:hover {
+            color: #c9a07a;
+        }
+
+        .footer .social-links a {
+            color: #8a8a9e;
+            margin: 0 0.6rem;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .footer .social-links a:hover {
+            color: #c9a07a;
+            transform: translateY(-3px);
+        }
+
+        .footer p {
+            font-size: 0.85rem;
+            margin-top: 1.5rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .blog-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .top-bar .social-links {
+                margin-top: 0.3rem;
+            }
+            nav {
+                display: none;
+            }
+            nav.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #ffffff;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                border-bottom: 1px solid #f0ebe5;
+            }
+            .mobile-toggle {
+                display: block;
+            }
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 0 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header {
+                padding: 3rem 0 2rem 0;
+            }
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            .blog-main .search-bar {
+                flex-direction: column;
+            }
+            .post-card .post-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <div class="auth-links">
+                <a href="admin/login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <a href="admin/signup.html"><i class="fas fa-user-plus"></i> Sign Up</a>
+                <a href="#"><i class="fas fa-search"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-scroll"></i> The <span>Style</span> Edit
+            </div>
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="blog.html" class="active">Blog</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="admin/login.html" class="nav-cta">Write for us</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Fashion <span>Stories</span></h1>
+            <p>Discover the latest trends, style guides, and fashion inspiration</p>
+        </div>
+    </section>
+
+    <!-- ===== BLOG SECTION ===== -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="blog-layout">
+
+                <!-- ===== MAIN CONTENT ===== -->
+                <div class="blog-main">
+
+                    <!-- Search Bar -->
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search articles..." />
+                        <button><i class="fas fa-search"></i> Search</button>
+                    </div>
+
+                    <!-- Posts Grid -->
+                    <div class="posts-grid">
+
+                        <!-- Post 1 -->
+                        <article class="post-card">
+                            <div class="post-image">
+                                <img src="assets/p2.png" alt="The Art of Layering" onerror="this.parentElement.style.background='#e8ddd0'; this.style.display='none';" />
+                            </div>
+                            <div class="post-content">
+                                <span class="post-category">Street Style</span>
+                                <h3><a href="post.html?id=1">The Art of Layering: Winter Street Style Guide</a></h3>
+                                <p class="post-excerpt">Master the art of layering with these 5 essential pieces that will elevate your winter wardrobe.</p>
+                                <div class="post-meta">
+                                    <span class="author">
+                                        <span class="avatar">S</span>
+                                        Sarah Mitchell
+                                    </span>
+                                    <span><i class="far fa-calendar-alt"></i> June 15, 2026</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Post 2 -->
+                        <article class="post-card">
+                            <div class="post-image">
+                                <img src="assets/p3.png" alt="Paris Fashion Week" onerror="this.parentElement.style.background='#d4c9bc'; this.style.display='none';" />
+                            </div>
+                            <div class="post-content">
+                                <span class="post-category">Runway</span>
+                                <h3><a href="post.html?id=2">Paris Fashion Week: The Trends You Need to Know</a></h3>
+                                <p class="post-excerpt">From bold shoulders to sheer fabrics, here's what dominated the Paris runways this season.</p>
+                                <div class="post-meta">
+                                    <span class="author">
+                                        <span class="avatar">M</span>
+                                        Marcus Cole
+                                    </span>
+                                    <span><i class="far fa-calendar-alt"></i> June 12, 2026</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Post 3 -->
+                        <article class="post-card">
+                            <div class="post-image">
+                                <img src="assets/p4.png" alt="Sustainable Fashion" onerror="this.parentElement.style.background='#d6c9b8'; this.style.display='none';" />
+                            </div>
+                            <div class="post-content">
+                                <span class="post-category">Sustainable Fashion</span>
+                                <h3><a href="post.html?id=3">5 Sustainable Brands Changing the Fashion Industry</a></h3>
+                                <p class="post-excerpt">Explore the eco-friendly brands making waves in the fashion industry with their innovative materials.</p>
+                                <div class="post-meta">
+                                    <span class="author">
+                                        <span class="avatar">J</span>
+                                        Jessica Wu
+                                    </span>
+                                    <span><i class="far fa-calendar-alt"></i> June 10, 2026</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Post 4 -->
+                        <article class="post-card">
+                            <div class="post-image">
+                                <img src="assets/p5.png" alt="Accessories Guide" onerror="this.parentElement.style.background='#ddd0c4'; this.style.display='none';" />
+                            </div>
+                            <div class="post-content">
+                                <span class="post-category">Accessories</span>
+                                <h3><a href="post.html?id=4">The Ultimate Accessories Guide for Every Occasion</a></h3>
+                                <p class="post-excerpt">From statement necklaces to timeless watches, find the perfect accessories for any event.</p>
+                                <div class="post-meta">
+                                    <span class="author">
+                                        <span class="avatar">A</span>
+                                        Amara Okafor
+                                    </span>
+                                    <span><i class="far fa-calendar-alt"></i> June 8, 2026</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Post 5 -->
+                        <article class="post-card">
+                            <div class="post-image">
+                                <img src="assets/p6.png" alt="Beauty Trends" onerror="this.parentElement.style.background='#d4c4b8'; this.style.display='none';" />
+                            </div>
+                            <div class="post-content">
+                                <span class="post-category">Beauty</span>
+                                <h3><a href="post.html?id=5">Summer Beauty Trends: Fresh Looks for the Season</a></h3>
+                                <p class="post-excerpt">Get ready for summer with these fresh beauty trends, from dewy skin to bold lips.</p>
+                                <div class="post-meta">
+                                    <span class="author">
+                                        <span class="avatar">L</span>
+                                        Lola Adeyemi
+                                    </span>
+                                    <span><i class="far fa-calendar-alt"></i> June 5, 2026</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Post 6 -->
+                        <article class="post-card">
+                            <div class="post-image">
+                                <img src="assets/p7.png" alt="Lifestyle" onerror="this.parentElement.style.background='#dccfc3'; this.style.display='none';" />
+                            </div>
+                            <div class="post-content">
+                                <span class="post-category">Lifestyle</span>
+                                <h3><a href="post.html?id=6">How to Build a Capsule Wardrobe That Works</a></h3>
+                                <p class="post-excerpt">Simplify your style with a capsule wardrobe that's versatile, timeless, and sustainable.</p>
+                                <div class="post-meta">
+                                    <span class="author">
+                                        <span class="avatar">T</span>
+                                        Tunde Balogun
+                                    </span>
+                                    <span><i class="far fa-calendar-alt"></i> June 2, 2026</span>
+                                </div>
+                            </div>
+                        </article>
+
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <a href="#">&laquo;</a>
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">&raquo;</a>
+                    </div>
+
+                </div>
+
+                <!-- ===== SIDEBAR ===== -->
+                <aside class="sidebar">
+
+                    <!-- Categories Widget -->
+                    <div class="sidebar-widget">
+                        <h3>Categories</h3>
+                        <ul class="category-list">
+                            <li><a href="category.html?cat=street-style">Street Style</a> <span class="count">12</span></li>
+                            <li><a href="category.html?cat=runway">Runway</a> <span class="count">8</span></li>
+                            <li><a href="category.html?cat=sustainable">Sustainable Fashion</a> <span class="count">6</span></li>
+                            <li><a href="category.html?cat=accessories">Accessories</a> <span class="count">10</span></li>
+                            <li><a href="category.html?cat=beauty">Beauty</a> <span class="count">9</span></li>
+                            <li><a href="category.html?cat=lifestyle">Lifestyle</a> <span class="count">7</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Recent Posts Widget -->
+                    <div class="sidebar-widget">
+                        <h3>Recent Posts</h3>
+                        <ul class="recent-posts">
+                            <li>
+                                <div class="thumb">
+                                    <img src="assets/p2.png" alt="Layering Guide" onerror="this.parentElement.style.background='#e8ddd0'; this.style.display='none';" />
+                                </div>
+                                <div class="info">
+                                    <a href="post.html?id=1">The Art of Layering: Winter Street Style Guide</a>
+                                    <div class="date">June 15, 2026</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="thumb">
+                                    <img src="assets/p3.png" alt="Paris Fashion Week" onerror="this.parentElement.style.background='#d4c9bc'; this.style.display='none';" />
+                                </div>
+                                <div class="info">
+                                    <a href="post.html?id=2">Paris Fashion Week: The Trends You Need to Know</a>
+                                    <div class="date">June 12, 2026</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="thumb">
+                                    <img src="assets/p4.png" alt="Sustainable Brands" onerror="this.parentElement.style.background='#d6c9b8'; this.style.display='none';" />
+                                </div>
+                                <div class="info">
+                                    <a href="post.html?id=3">5 Sustainable Brands Changing the Fashion Industry</a>
+                                    <div class="date">June 10, 2026</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- About Widget -->
+                    <div class="sidebar-widget">
+                        <h3>About The Style Edit</h3>
+                        <p style="color: #5a5a72; font-size: 0.95rem; line-height: 1.7;">
+                            The Style Edit is your go-to destination for fashion inspiration, style guides, and the latest trends from the world's most iconic runways and street style.
+                        </p>
+                        <a href="about.html" style="display: inline-block; margin-top: 1rem; color: #c9a07a; font-weight: 500;">Read More →</a>
+                    </div>
+
+                </aside>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="blog.html">Blog</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="admin/login.html">Admin</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>&copy; 2026 The Style Edit. All rights reserved. Made with <i class="fas fa-heart" style="color: #c9a07a;"></i></p>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // Mobile toggle
+        const toggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        toggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // Close on link click (mobile)
+        document.querySelectorAll('#navLinks a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // Sticky header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.04)';
+            }
+        });
+
+        // Search functionality
+        document.querySelector('.search-bar button').addEventListener('click', function() {
+            const query = document.querySelector('.search-bar input').value.trim();
+            if (query) {
+                alert('Searching for: "' + query + '"');
+            } else {
+                alert('Please enter a search term.');
+            }
+        });
+    </script>
+
+</body>
+</html>

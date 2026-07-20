@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Style Edit · Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0ebe5;
+            color: #1a1a2e;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            background: #1a1a2e;
+            color: #e8e3d9;
+            padding: 0.5rem 0;
+            font-size: 0.8rem;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .top-bar .auth-links a {
+            color: #e8e3d9;
+            margin-left: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .top-bar .auth-links a:hover {
+            color: #c9a07a;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: #ffffff;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eeeae5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .logo span {
+            color: #c9a07a;
+        }
+
+        .logo i {
+            color: #c9a07a;
+            margin-right: 0.3rem;
+        }
+
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .admin-user .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #c9a07a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .admin-user .name {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .admin-user .role {
+            font-size: 0.75rem;
+            color: #8a8a9e;
+        }
+
+        .admin-user .logout {
+            color: #8a8a9e;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .admin-user .logout:hover {
+            color: #e74c3c;
+        }
+
+        /* ===== DASHBOARD LAYOUT ===== */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #f0ebe5;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .sidebar .menu-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8a8a9e;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .sidebar .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.7rem 1rem;
+            border-radius: 0.8rem;
+            transition: 0.3s;
+            color: #5a5a72;
+            margin-bottom: 0.2rem;
+            cursor: pointer;
+        }
+
+        .sidebar .menu-item:hover {
+            background: #fcf9f7;
+            color: #1a1a2e;
+        }
+
+        .sidebar .menu-item.active {
+            background: #fcf9f7;
+            color: #c9a07a;
+            font-weight: 600;
+        }
+
+        .sidebar .menu-item i {
+            width: 20px;
+            font-size: 1rem;
+        }
+
+        .sidebar .menu-item .badge {
+            margin-left: auto;
+            background: #f0ebe5;
+            padding: 0.1rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #5a5a72;
+        }
+
+        .sidebar .menu-item.active .badge {
+            background: #c9a07a;
+            color: #ffffff;
+        }
+
+        .sidebar .divider {
+            height: 1px;
+            background: #f0ebe5;
+            margin: 0.8rem 0;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+        }
+
+        .page-header h1 span {
+            color: #c9a07a;
+        }
+
+        .page-header p {
+            color: #8a8a9e;
+        }
+
+        /* ===== STATS ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border-radius: 1.2rem;
+            padding: 1.5rem;
+            border: 1px solid #f0ebe5;
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        .stat-card .stat-icon {
+            font-size: 1.8rem;
+            color: #c9a07a;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.85rem;
+            color: #8a8a9e;
+        }
+
+        .stat-card .stat-change {
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.3rem;
+        }
+
+        .stat-card .stat-change.up {
+            color: #27ae60;
+        }
+
+        .stat-card .stat-change.down {
+            color: #e74c3c;
+        }
+
+        /* ===== QUICK ACTIONS ===== */
+        .quick-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.5rem;
+            background: #ffffff;
+            border: 1px solid #f0ebe5;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #2d2d44;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .quick-action-btn:hover {
+            background: #c9a07a;
+            color: #ffffff;
+            border-color: #c9a07a;
+            transform: translateY(-2px);
+        }
+
+        .quick-action-btn.primary {
+            background: #c9a07a;
+            color: #ffffff;
+            border-color: #c9a07a;
+        }
+
+        .quick-action-btn.primary:hover {
+            background: #b88e68;
+            border-color: #b88e68;
+        }
+
+        /* ===== RECENT POSTS ===== */
+        .recent-section {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #f0ebe5;
+        }
+
+        .recent-section .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .recent-section .section-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+        }
+
+        .recent-section .section-header a {
+            color: #c9a07a;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .recent-section .section-header a:hover {
+            color: #b88e68;
+        }
+
+        .post-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .post-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 1rem;
+            border-radius: 0.8rem;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .post-item:hover {
+            background: #fcf9f7;
+            border-color: #f0ebe5;
+        }
+
+        .post-item .thumb {
+            width: 50px;
+            height: 50px;
+            border-radius: 0.5rem;
+            background: #e8e3d9;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .post-item .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-item .info {
+            flex: 1;
+        }
+
+        .post-item .info .title {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .post-item .info .meta {
+            font-size: 0.8rem;
+            color: #8a8a9e;
+        }
+
+        .post-item .status {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+        }
+
+        .post-item .status.published {
+            background: #e8f5e9;
+            color: #27ae60;
+        }
+
+        .post-item .status.draft {
+            background: #fff3e0;
+            color: #f39c12;
+        }
+
+        .post-item .status.pending {
+            background: #e3f2fd;
+            color: #2196f3;
+        }
+
+        .post-item .actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .post-item .actions a {
+            color: #8a8a9e;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .post-item .actions a:hover {
+            color: #c9a07a;
+        }
+
+        .post-item .actions a.delete:hover {
+            color: #e74c3c;
+        }
+
+        /* ===== ACTIVITY FEED ===== */
+        .activity-section {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #f0ebe5;
+        }
+
+        .activity-section .section-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #fcf9f7;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-item .icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .activity-item .icon.green {
+            background: #e8f5e9;
+            color: #27ae60;
+        }
+
+        .activity-item .icon.blue {
+            background: #e3f2fd;
+            color: #2196f3;
+        }
+
+        .activity-item .icon.orange {
+            background: #fff3e0;
+            color: #f39c12;
+        }
+
+        .activity-item .icon.red {
+            background: #fce4ec;
+            color: #e74c3c;
+        }
+
+        .activity-item .content {
+            flex: 1;
+        }
+
+        .activity-item .content .text {
+            font-size: 0.9rem;
+        }
+
+        .activity-item .content .text strong {
+            color: #1a1a2e;
+        }
+
+        .activity-item .content .time {
+            font-size: 0.75rem;
+            color: #8a8a9e;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 0.5rem;
+                padding: 1.2rem;
+            }
+            .sidebar .menu-label {
+                grid-column: 1 / -1;
+            }
+            .sidebar .divider {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.2rem;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .post-item {
+                flex-wrap: wrap;
+            }
+            .post-item .info {
+                flex: 1 1 100%;
+            }
+            .admin-user .name,
+            .admin-user .role {
+                display: none;
+            }
+            .quick-actions {
+                flex-direction: column;
+            }
+            .quick-action-btn {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+            .sidebar {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+        <div class="container">
+            <span><i class="fas fa-shield-alt"></i> Admin Panel</span>
+            <div class="auth-links">
+                <a href="../index.html"><i class="fas fa-home"></i> View Site</a>
+                <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-scroll"></i> The <span>Style</span> Edit
+            </div>
+            <div class="admin-user">
+                <div class="avatar">S</div>
+                <div>
+                    <div class="name">Sarah Mitchell</div>
+                    <div class="role">Editor-in-Chief</div>
+                </div>
+                <a href="login.html" class="logout" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== DASHBOARD ===== -->
+    <div class="container">
+        <div class="dashboard">
+
+            <!-- ===== SIDEBAR ===== -->
+            <aside class="sidebar">
+                <div class="menu-label">Main Menu</div>
+                <a href="dashboard.html" class="menu-item active">
+                    <i class="fas fa-th-large"></i> Dashboard
+                </a>
+                <a href="posts.html" class="menu-item">
+                    <i class="fas fa-file-alt"></i> All Posts
+                    <span class="badge">12</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-plus-circle"></i> Add New
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-tags"></i> Categories
+                    <span class="badge">6</span>
+                </a>
+                <div class="divider"></div>
+                <div class="menu-label">Engagement</div>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-comments"></i> Comments
+                    <span class="badge">24</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-users"></i> Users
+                    <span class="badge">8</span>
+                </a>
+                <div class="divider"></div>
+                <div class="menu-label">Settings</div>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-palette"></i> Theme
+                </a>
+            </aside>
+
+            <!-- ===== MAIN CONTENT ===== -->
+            <main class="main-content">
+
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1>Welcome back, <span>Sarah</span> 👋</h1>
+                    <p>Here's what's happening with your blog today.</p>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Total Posts</div>
+                        <div class="stat-change up"><i class="fas fa-arrow-up"></i> 3 this month</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-eye"></i></div>
+                        <div class="stat-number">4.8k</div>
+                        <div class="stat-label">Total Views</div>
+                        <div class="stat-change up"><i class="fas fa-arrow-up"></i> 12% increase</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-comments"></i></div>
+                        <div class="stat-number">24</div>
+                        <div class="stat-label">Total Comments</div>
+                        <div class="stat-change up"><i class="fas fa-arrow-up"></i> 5 new</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">Total Users</div>
+                        <div class="stat-change down"><i class="fas fa-arrow-down"></i> 1 this month</div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <a href="#" class="quick-action-btn primary"><i class="fas fa-plus"></i> New Post</a>
+                    <a href="#" class="quick-action-btn"><i class="fas fa-edit"></i> Edit Drafts</a>
+                    <a href="#" class="quick-action-btn"><i class="fas fa-comment-dots"></i> Moderate Comments</a>
+                    <a href="#" class="quick-action-btn"><i class="fas fa-chart-line"></i> View Analytics</a>
+                </div>
+
+                <!-- Recent Posts -->
+                <div class="recent-section">
+                    <div class="section-header">
+                        <h3>Recent Posts</h3>
+                        <a href="posts.html">View All →</a>
+                    </div>
+                    <div class="post-list">
+
+                        <div class="post-item">
+                            <div class="thumb">
+                                <img src="../assets/p2.png" alt="Layering Guide" onerror="this.parentElement.style.background='#e8ddd0'; this.style.display='none';" />
+                            </div>
+                            <div class="info">
+                                <div class="title">The Art of Layering: Winter Street Style Guide</div>
+                                <div class="meta">Street Style · June 15, 2026</div>
+                            </div>
+                            <span class="status published">Published</span>
+                            <div class="actions">
+                                <a href="#" title="Edit"><i class="fas fa-edit"></i></a>
+                                <a href="#" title="View"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="delete" title="Delete"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="post-item">
+                            <div class="thumb">
+                                <img src="../assets/p3.png" alt="Paris Fashion Week" onerror="this.parentElement.style.background='#d4c9bc'; this.style.display='none';" />
+                            </div>
+                            <div class="info">
+                                <div class="title">Paris Fashion Week: The Trends You Need to Know</div>
+                                <div class="meta">Runway · June 12, 2026</div>
+                            </div>
+                            <span class="status published">Published</span>
+                            <div class="actions">
+                                <a href="#" title="Edit"><i class="fas fa-edit"></i></a>
+                                <a href="#" title="View"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="delete" title="Delete"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="post-item">
+                            <div class="thumb">
+                                <img src="../assets/p4.png" alt="Sustainable Brands" onerror="this.parentElement.style.background='#d6c9b8'; this.style.display='none';" />
+                            </div>
+                            <div class="info">
+                                <div class="title">5 Sustainable Brands Changing the Fashion Industry</div>
+                                <div class="meta">Sustainable Fashion · June 10, 2026</div>
+                            </div>
+                            <span class="status draft">Draft</span>
+                            <div class="actions">
+                                <a href="#" title="Edit"><i class="fas fa-edit"></i></a>
+                                <a href="#" title="View"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="delete" title="Delete"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="post-item">
+                            <div class="thumb">
+                                <img src="../assets/p5.png" alt="Accessories Guide" onerror="this.parentElement.style.background='#ddd0c4'; this.style.display='none';" />
+                            </div>
+                            <div class="info">
+                                <div class="title">The Ultimate Accessories Guide for Every Occasion</div>
+                                <div class="meta">Accessories · June 8, 2026</div>
+                            </div>
+                            <span class="status pending">Pending Review</span>
+                            <div class="actions">
+                                <a href="#" title="Edit"><i class="fas fa-edit"></i></a>
+                                <a href="#" title="View"><i class="fas fa-eye"></i></a>
+                                <a href="#" class="delete" title="Delete"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Activity Feed -->
+                <div class="activity-section">
+                    <div class="section-header">
+                        <h3>Recent Activity</h3>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="icon green"><i class="fas fa-check"></i></div>
+                        <div class="content">
+                            <div class="text"><strong>Sarah Mitchell</strong> published a new post: "The Art of Layering"</div>
+                            <div class="time">2 hours ago</div>
+                        </div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="icon blue"><i class="fas fa-comment"></i></div>
+                        <div class="content">
+                            <div class="text"><strong>Amara Okafor</strong> commented on "Paris Fashion Week"</div>
+                            <div class="time">5 hours ago</div>
+                        </div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="icon orange"><i class="fas fa-user-plus"></i></div>
+                        <div class="content">
+                            <div class="text"><strong>Marcus Cole</strong> joined as a Contributor</div>
+                            <div class="time">1 day ago</div>
+                        </div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="icon green"><i class="fas fa-edit"></i></div>
+                        <div class="content">
+                            <div class="text"><strong>Jessica Wu</strong> updated "5 Sustainable Brands"</div>
+                            <div class="time">2 days ago</div>
+                        </div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="icon red"><i class="fas fa-trash"></i></div>
+                        <div class="content">
+                            <div class="text"><strong>Admin</strong> deleted a comment from "Lola Adeyemi"</div>
+                            <div class="time">3 days ago</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </main>
+
+        </div>
+    </div>
+
+</body>
+</html>

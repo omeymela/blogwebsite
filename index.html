@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Style Edit · Fashion & Lifestyle Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fcf9f7;
+            color: #1a1a2e;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            background: #1a1a2e;
+            color: #e8e3d9;
+            padding: 0.5rem 0;
+            font-size: 0.8rem;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .top-bar .social-links a {
+            color: #e8e3d9;
+            margin-left: 1rem;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .top-bar .social-links a:hover {
+            color: #c9a07a;
+        }
+
+        .top-bar .auth-links a {
+            color: #e8e3d9;
+            margin-left: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .top-bar .auth-links a:hover {
+            color: #c9a07a;
+        }
+
+        /* ===== HEADER / NAVIGATION ===== */
+        header {
+            background: #ffffff;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid #eeeae5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .logo span {
+            color: #c9a07a;
+        }
+
+        .logo i {
+            color: #c9a07a;
+            margin-right: 0.3rem;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: #2d2d44;
+            transition: 0.3s;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        /* ===== NAVIGATION HOVER EFFECT ===== */
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #c9a07a;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #c9a07a;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== ACTIVE STATE ===== */
+        nav a.active {
+            color: #c9a07a;
+        }
+
+        nav a.active::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: #c9a07a;
+            color: #ffffff !important;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600 !important;
+            transition: 0.3s;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: #b88e68;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 160, 122, 0.3);
+            color: #ffffff !important;
+        }
+
+        /* ===== ACTIVE STATE FOR NAV-CTA ===== */
+        .nav-cta.active {
+            background: #b88e68;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 160, 122, 0.3);
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #1a1a2e;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #fcf9f7 0%, #f0ebe5 100%);
+            padding: 4rem 0 3rem 0;
+            border-bottom: 1px solid #eeeae5;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+        }
+
+        .hero-content h1 span {
+            color: #c9a07a;
+        }
+
+        .hero-content p {
+            color: #5a5a72;
+            font-size: 1.1rem;
+            max-width: 480px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #c9a07a;
+            color: #ffffff;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #b88e68;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(201, 160, 122, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #1a1a2e;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: 2px solid #c9a07a;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background: #c9a07a;
+            color: #ffffff;
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+            aspect-ratio: 1/1;
+        }
+
+        .hero-image .placeholder {
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 1/1;
+            border-radius: 1.5rem;
+            background: linear-gradient(135deg, #e8e3d9, #d4c9bc);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: #b8a99a;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ===== FEATURED POSTS ===== */
+        .featured {
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #1a1a2e;
+        }
+
+        .section-header h2 span {
+            color: #c9a07a;
+        }
+
+        .section-header a {
+            color: #c9a07a;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .section-header a:hover {
+            color: #b88e68;
+            transform: translateX(4px);
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .post-card {
+            background: #ffffff;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            transition: 0.3s;
+            border: 1px solid #f0ebe5;
+        }
+
+        .post-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .post-card .post-image {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: #e8e3d9;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .post-card .post-image a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .post-card .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.3s;
+        }
+
+        .post-card:hover .post-image img {
+            transform: scale(1.03);
+        }
+
+        .post-card .post-content {
+            padding: 1.5rem;
+        }
+
+        .post-card .post-category {
+            display: inline-block;
+            background: #f0ebe5;
+            color: #5a5a72;
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+            transition: 0.3s;
+        }
+
+        .post-card .post-category:hover {
+            background: #c9a07a;
+            color: #ffffff;
+        }
+
+        .post-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            transition: 0.3s;
+        }
+
+        .post-card h3 a {
+            color: #1a1a2e;
+            transition: 0.3s;
+        }
+
+        .post-card h3 a:hover {
+            color: #c9a07a;
+        }
+
+        .post-card .post-excerpt {
+            color: #5a5a72;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== READ MORE BUTTON ===== */
+        .post-card .read-more {
+            display: inline-block;
+            color: #c9a07a;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            margin-bottom: 1rem;
+        }
+
+        .post-card .read-more:hover {
+            color: #b88e68;
+            transform: translateX(4px);
+        }
+
+        .post-card .read-more i {
+            font-size: 0.7rem;
+            margin-left: 0.3rem;
+            transition: 0.3s;
+        }
+
+        .post-card .read-more:hover i {
+            transform: translateX(4px);
+        }
+
+        .post-card .post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #8a8a9e;
+            border-top: 1px solid #f0ebe5;
+            padding-top: 1rem;
+        }
+
+        .post-card .post-meta .author {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .post-card .post-meta .author .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #c9a07a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* ===== CATEGORIES ===== */
+        .categories {
+            padding: 3rem 0;
+            background: #ffffff;
+            border-top: 1px solid #f0ebe5;
+            border-bottom: 1px solid #f0ebe5;
+        }
+
+        .categories .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .category-tag {
+            background: #fcf9f7;
+            border: 1px solid #f0ebe5;
+            padding: 0.6rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #2d2d44;
+            transition: 0.3s;
+        }
+
+        .category-tag:hover {
+            background: #c9a07a;
+            color: #ffffff;
+            border-color: #c9a07a;
+            transform: translateY(-2px);
+        }
+
+        /* ===== NEWSLETTER ===== */
+        .newsletter {
+            background: #1a1a2e;
+            color: #e8e3d9;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .newsletter p {
+            color: #a8a8be;
+            margin-bottom: 1.5rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.8rem 1.2rem;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        .newsletter-form input::placeholder {
+            color: #8a8a9e;
+        }
+
+        .newsletter-form button {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            background: #c9a07a;
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background: #b88e68;
+            transform: translateY(-2px);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #0f0f1a;
+            color: #8a8a9e;
+            padding: 3rem 0 2rem 0;
+            text-align: center;
+        }
+
+        .footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer .footer-links a {
+            color: #e8e3d9;
+            transition: 0.3s;
+        }
+
+        .footer .footer-links a:hover {
+            color: #c9a07a;
+        }
+
+        .footer .social-links a {
+            color: #8a8a9e;
+            margin: 0 0.6rem;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .footer .social-links a:hover {
+            color: #c9a07a;
+            transform: translateY(-3px);
+        }
+
+        .footer p {
+            font-size: 0.85rem;
+            margin-top: 1.5rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .hero-content p {
+                max-width: 100%;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .posts-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .top-bar .social-links {
+                margin-top: 0.3rem;
+            }
+            nav {
+                display: none;
+            }
+            nav.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #ffffff;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                border-bottom: 1px solid #f0ebe5;
+            }
+            .mobile-toggle {
+                display: block;
+            }
+            .hero-content h1 {
+                font-size: 2.4rem;
+            }
+            .hero-image img {
+                max-width: 320px;
+            }
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 0 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 3rem 0 2rem 0;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .hero-image img {
+                max-width: 250px;
+            }
+            .post-card .post-content {
+                padding: 1rem;
+            }
+            .newsletter h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <div class="auth-links">
+                <a href="admin/login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <a href="admin/signup.html"><i class="fas fa-user-plus"></i> Sign Up</a>
+                <a href="#"><i class="fas fa-search"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-scroll"></i> The <span>Style</span> Edit
+            </div>
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="navLinks">
+                <a href="index.html" class="active">Home</a>
+                <a href="blog.html">Blog</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="admin/login.html" class="nav-cta">Write for us</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Where <span>Fashion</span> Meets Storytelling</h1>
+                <p>Discover the latest trends, style guides, and fashion inspiration from the world's most iconic runways and street style.</p>
+                <div class="hero-buttons">
+                    <a href="blog.html" class="btn-primary"><i class="fas fa-arrow-right"></i> Explore Blog</a>
+                    <a href="about.html" class="btn-secondary"><i class="fas fa-user"></i> Meet the Editor</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/p1.png" alt="The Style Edit - Fashion Blog" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                <div class="placeholder" style="display:none;">
+                    <i class="fas fa-tshirt"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CATEGORIES ===== -->
+    <section class="categories">
+        <div class="container">
+            <a href="category.html?cat=street-style" class="category-tag">Street Style</a>
+            <a href="category.html?cat=runway" class="category-tag">Runway</a>
+            <a href="category.html?cat=sustainable" class="category-tag">Sustainable Fashion</a>
+            <a href="category.html?cat=accessories" class="category-tag">Accessories</a>
+            <a href="category.html?cat=beauty" class="category-tag">Beauty</a>
+            <a href="category.html?cat=lifestyle" class="category-tag">Lifestyle</a>
+        </div>
+    </section>
+
+    <!-- ===== FEATURED POSTS ===== -->
+    <section class="featured">
+        <div class="container">
+            <div class="section-header">
+                <h2>Latest <span>Editorials</span></h2>
+                <a href="blog.html">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="posts-grid">
+
+                <!-- Post 1 -->
+                <article class="post-card">
+                    <div class="post-image">
+                        <a href="post.html?id=1">
+                            <img src="assets/p2.png" alt="The Art of Layering: Winter Street Style Guide" onerror="this.parentElement.style.background='#e8ddd0'; this.style.display='none';" />
+                        </a>
+                    </div>
+                    <div class="post-content">
+                        <a href="category.html?cat=street-style" class="post-category">Street Style</a>
+                        <h3><a href="post.html?id=1">The Art of Layering: Winter Street Style Guide</a></h3>
+                        <p class="post-excerpt">Master the art of layering with these 5 essential pieces that will elevate your winter wardrobe.</p>
+                        <a href="post.html?id=1" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        <div class="post-meta">
+                            <span class="author">
+                                <span class="avatar">S</span>
+                                Sarah Mitchell
+                            </span>
+                            <span><i class="far fa-calendar-alt"></i> June 15, 2026</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="post-card">
+                    <div class="post-image">
+                        <a href="post.html?id=2">
+                            <img src="assets/p3.png" alt="Paris Fashion Week: The Trends You Need to Know" onerror="this.parentElement.style.background='#d4c9bc'; this.style.display='none';" />
+                        </a>
+                    </div>
+                    <div class="post-content">
+                        <a href="category.html?cat=runway" class="post-category">Runway</a>
+                        <h3><a href="post.html?id=2">Paris Fashion Week: The Trends You Need to Know</a></h3>
+                        <p class="post-excerpt">From bold shoulders to sheer fabrics, here's what dominated the Paris runways this season.</p>
+                        <a href="post.html?id=2" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        <div class="post-meta">
+                            <span class="author">
+                                <span class="avatar">M</span>
+                                Marcus Cole
+                            </span>
+                            <span><i class="far fa-calendar-alt"></i> June 12, 2026</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="post-card">
+                    <div class="post-image">
+                        <a href="post.html?id=3">
+                            <img src="assets/p4.png" alt="5 Sustainable Brands Changing the Fashion Industry" onerror="this.parentElement.style.background='#d6c9b8'; this.style.display='none';" />
+                        </a>
+                    </div>
+                    <div class="post-content">
+                        <a href="category.html?cat=sustainable" class="post-category">Sustainable Fashion</a>
+                        <h3><a href="post.html?id=3">5 Sustainable Brands Changing the Fashion Industry</a></h3>
+                        <p class="post-excerpt">Explore the eco-friendly brands making waves in the fashion industry with their innovative materials.</p>
+                        <a href="post.html?id=3" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        <div class="post-meta">
+                            <span class="author">
+                                <span class="avatar">J</span>
+                                Jessica Wu
+                            </span>
+                            <span><i class="far fa-calendar-alt"></i> June 10, 2026</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NEWSLETTER ===== -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay <span style="color: #c9a07a;">In Style</span></h2>
+            <p>Subscribe to get the latest fashion trends, style tips, and exclusive content delivered to your inbox.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+                <input type="email" placeholder="Enter your email" required />
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="blog.html">Blog</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="admin/login.html">Admin</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>&copy; 2026 The Style Edit. All rights reserved. Made with <i class="fas fa-heart" style="color: #c9a07a;"></i></p>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // Mobile toggle
+        const toggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        toggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // Close on link click (mobile)
+        document.querySelectorAll('#navLinks a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // Sticky header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.04)';
+            }
+        });
+    </script>
+
+</body>
+</html>
